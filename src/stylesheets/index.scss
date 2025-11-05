@@ -1,14 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-@import './layout/index.scss';
-@import './nav-bar/index.scss';
-@import './lightbulb-page/index.scss';
-
-html, body {
-  padding: 0;
-  margin: 0;
+:root{
+  --bg:#f6f7fb;        
+  --ink:#111;
+  --muted:#6b7280;
+  --primary:#111;       
+  --card:#fff;
+  --border:#e6e6e6;
+  --shadow:0 1px 2px rgba(0,0,0,.06);
 }
 
-* {
-  font-family: 'Open Sans', sans-serif;
+html,body{ background:var(--bg); color:var(--ink); margin:0; }
+
+/* === CONTENEDOR CENTRAL === */
+.layout__page{ max-width:1120px; margin:0 auto; }
+
+/* === NAVBAR tipo “pastillas” === */
+.nav-bar{ display:flex; gap:12px; margin:8px 0 18px; }
+.nav-bar__link{
+  padding:8px 12px; border-radius:999px; text-decoration:none;
+  color:var(--ink); background:transparent; border:1px solid transparent;
+  transition:.15s ease;
 }
+.nav-bar__link:hover{ border-color:var(--border); }
+.nav-bar__link--active{ background:var(--primary); color:#fff; box-shadow:var(--shadow); }
+
+/* === TIPOGRAFÍA + UTILIDADES === */
+.muted{ color:var(--muted); }
+.section-title{ margin:14px 0 8px; font-size:18px; font-weight:700; }
+
+/* === CARDS === */
+.grid-cards,.grid-courses{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:16px; box-shadow:var(--shadow);
+  transition:transform .06s ease, box-shadow .06s ease;
+}
+.card:hover{ transform:translateY(-1px); }
+.card--click{ cursor:pointer; }
+.card--kpi h3{ font-size:14px; margin:0 0 6px; color:var(--muted); }
+.card--kpi b{ font-size:28px; line-height:1; }
+
+/* === BOTONES === */
+.btn{
+  padding:8px 12px; border:1px solid var(--border);
+  border-radius:10px; background:#fff; cursor:pointer;
+}
+.btn--ghost{ background:transparent; }
+
+/* === TABLAS (con header fijo) === */
+.table-wrap{
+  overflow:auto; background:var(--card);
+  border:1px solid var(--border); border-radius:12px;
+}
+.table{ width:100%; border-collapse:collapse; font-size:14px; }
+.table thead th{
+  position:sticky; top:0; background:#fafafa;
+  text-align:left; font-weight:700; padding:10px 12px;
+  border-bottom:1px solid var(--border);
+}
+.table td{ padding:10px 12px; border-bottom:1px solid #f0f0f0; }
+.table tbody tr:hover{ background:#fafafa; }

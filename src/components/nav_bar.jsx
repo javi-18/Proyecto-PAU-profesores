@@ -1,28 +1,19 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
 
-export const NavBar = () => {
-  const navLinkClass = ({ isActive }) => {
-    const classes = ['nav-bar__link']
-    if (isActive) classes.push('nav-bar__link--active')
-    return classes.join(' ')
-  }
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+export default function NavBar() {
   return (
-    <nav className='nav-bar'>
-      <NavLink
-        className={navLinkClass}
-        to='/'
-      >
-        Inicio
+    <nav className="nav-bar">
+      <NavLink to="/" className="nav-bar__link" end>
+        Dashboard
       </NavLink>
-      <NavLink
-        className={navLinkClass}
-        to='/lightbulb'
-      >
-        Ampolleta
+      <NavLink to="/postulantes" className="nav-bar__link">
+        Postulantes
+      </NavLink>
+      <NavLink to="/preselecciones" className="nav-bar__link">
+        Preselecciones
       </NavLink>
     </nav>
-  )
+  );
 }
- 
-export default NavBar
