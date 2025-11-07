@@ -1,7 +1,11 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../state/store";
+import KpiCard from "../components/kpi_card";
+import CourseCard from "../components/Course_card";
 
 export default function DashboardPage() {
+  const { counts } = useStore();
   const navigate = useNavigate();
 
   return (
@@ -9,50 +13,20 @@ export default function DashboardPage() {
       <h2 className="section-title">Panel del Profesor</h2>
       <p className="muted">Resumen general de tus cursos y postulantes.</p>
 
-      {/* KPI cards */}
       <div className="grid-cards">
-        <div
-          className="card card--kpi card--click"
-          onClick={() => navigate("/postulantes")}
-        >
-          <h3>Total postulantes</h3>
-          <b>—</b>
-          <p className="muted">Ver listado completo</p>
-        </div>
-
-        <div
-          className="card card--kpi card--click"
-          onClick={() => navigate("/preselecciones")}
-        >
-          <h3>Preseleccionados</h3>
-          <b>—</b>
-          <p className="muted">Candidatos listos para evaluación</p>
-        </div>
+        <KpiCard title="Total postulantes" value={counts.total} onClick={()=>navigate("/postulantes")} />
+        <KpiCard title="Preseleccionados" value={counts.pre} onClick={()=>navigate("/preselecciones")} />
+        <KpiCard title="Requieren atención" value={"—"} />
       </div>
 
-      {/* Cursos */}
-      <h3 className="section-title" style={{ marginTop: 24 }}>
-        Cursos activos
-      </h3>
-
+      <h3 className="section-title" style={{marginTop:24}}>Cursos activos</h3>
       <div className="grid-courses">
-        <div
-          className="card card--click"
-          onClick={() => navigate("/postulantes?curso=INF322")}
-        >
-          <b>INF322</b>
-          <p>Interfaces Usuarias · 2025-1</p>
-          <small>10 postulantes · 0/2 seleccionados</small>
-        </div>
-
-        <div
-          className="card card--click"
-          onClick={() => navigate("/postulantes?curso=INF234")}
-        >
-          <b>INF234</b>
-          <p>Introducción a la Programación · 2025-1</p>
-          <small>5 postulantes · 1/3 seleccionados</small>
-        </div>
+        <CourseCard code="INF322" name="Interfaces Usuarias · 2025-1"
+          meta={`${counts.porCurso("INF322")} postulantes`} onClick={()=>navigate("/postulantes?curso=INF322")} />
+        <CourseCard code="INF234" name="Intro a la Programación · 2025-1"
+          meta={`${counts.porCurso("INF234")} postulantes`} onClick={()=>navigate("/postulantes?curso=INF234")} />
+        <CourseCard code="INF280" name="Estructuras de Datos · 2025-1"
+          meta={`${counts.porCurso("INF280")} postulantes`} onClick={()=>navigate("/postulantes?curso=INF280")} />
       </div>
     </section>
   );
