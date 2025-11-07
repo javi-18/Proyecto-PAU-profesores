@@ -203,8 +203,8 @@ const ComparacionPage = () => {
                                             {candidato.status === 'Postulante' && !candidato.isPreselected && (
                                                 <button
                                                     onClick={() => {
-                                                        candidato.isPreselected = true;
-                                                        window.location.reload();
+                                                        candidato.isPreselected = !candidato.isPreselected;
+                                                        setCandidatos([...candidatos]);
                                                     }}
                                                     className="text-yellow-600 hover:text-yellow-800 font-semibold text-sm"
                                                 >
