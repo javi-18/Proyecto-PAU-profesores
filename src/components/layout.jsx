@@ -1,16 +1,15 @@
+import React from 'react';
+import NavBar from './nav_bar';
 
-import React from "react";
-import { Outlet } from "react-router-dom";
-import NavBar from "./nav_bar";
+const Layout = ({ children }) => {
+    return (
+        <div className="min-h-screen bg-gray-50">
+            <NavBar />
+            <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {children}
+            </main>
+        </div>
+    );
+};
 
-export default function Layout() {
-  return (
-    <div className="layout">
-      <h1 className="layout__title">PAU · Profesores</h1>
-      <NavBar />
-      <main className="layout__page">
-        <Outlet />
-      </main>
-    </div>
-  );
-}
+export default Layout;
